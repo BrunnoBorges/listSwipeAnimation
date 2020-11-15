@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function ListItem({data, handleLeft, handleRight}){
 
 
-  function LeftActions(progress, dragX){
+  function LeftActions({progress, dragX, onPress}){
 
     const scale = dragX.interpolate({
       inputRange:[0, 100],
@@ -15,10 +15,11 @@ export default function ListItem({data, handleLeft, handleRight}){
     })
 
     return(
-      <View style={styles.leftAction}>
-        <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}> Marcar como Lida</Animated.Text>
-        {/* <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}> <Icon name="check-square" size={40} color="#FFF" /> </Animated.Text> */}
-      </View>
+        <TouchableOpacity onPress={onPress} style={styles.leftAction} >
+          <Animated.View style={[{padding: 20},  { transform: [{ scale: scale}]} ]}>
+            <Icon name="envelope-open" size={35} color="#FFF" />
+          </Animated.View>
+        </TouchableOpacity>
     );
   }
 
@@ -41,8 +42,10 @@ export default function ListItem({data, handleLeft, handleRight}){
 
   return(
     <Swipeable
-        renderLeftActions={LeftActions}
-        onSwipeableLeftOpen={handleLeft}
+        renderLeftActions={(progress, dragX)=> 
+        <LeftActions progress={progress} dragX={dragX} onPress={handleLeft}/>}
+        // renderLeftActions={LeftActions}
+        // onSwipeableLeftOpen={handleLeft}
         renderRightActions={(progress, dragX)=>     
         <RightActions progress={progress} dragX={dragX} onPress={handleRight} />}
     >
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
   leftAction:{
     backgroundColor: '#0062CC',
     justifyContent: 'center',
-    flex:1,
+    // flex:1,
   },
   rightAction:{
     backgroundColor: '#FF0000',
