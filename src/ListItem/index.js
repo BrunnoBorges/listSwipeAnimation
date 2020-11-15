@@ -45,7 +45,7 @@ export default function ListItem({data, handleLeft, handleRight}){
         renderLeftActions={(progress, dragX)=> 
         <LeftActions progress={progress} dragX={dragX} onPress={handleLeft}/>}
         // renderLeftActions={LeftActions}
-        // onSwipeableLeftOpen={handleLeft}
+        // onSwipeableLeftOpen={handleLeft} Metodo para chamar a fuction handleLeft quando checgar ate o fim do Scroll
         renderRightActions={(progress, dragX)=>     
         <RightActions progress={progress} dragX={dragX} onPress={handleRight} />}
     >
