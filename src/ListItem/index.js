@@ -5,6 +5,21 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ListItem({data, handleLeft, handleRight}){
 
+  // function LeftActions(progress, dragX){
+
+  //   const scale = dragX.interpolate({
+  //     inputRange:[0, 100],
+  //     outputRange:[0, 1],
+  //     extrapolate: 'clamp'
+  //   })
+
+  //   return(
+  //     <View style={styles.leftAction}>
+  //       <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>Notificação marcada como lida</Animated.Text>
+  //     </View>
+  //   );
+  // }
+
 
   function LeftActions({progress, dragX, onPress}){
 
@@ -42,11 +57,12 @@ export default function ListItem({data, handleLeft, handleRight}){
 
   return(
     <Swipeable
-        renderLeftActions={(progress, dragX)=> 
-        <LeftActions progress={progress} dragX={dragX} onPress={handleLeft}/>}
-        // renderLeftActions={LeftActions}
-        // onSwipeableLeftOpen={handleLeft} Metodo para chamar a fuction handleLeft quando checgar ate o fim do Scroll
-        renderRightActions={(progress, dragX)=>     
+        //Metodo para chamar a fuction handleLeft quando checgar ate o fim do Scroll
+          // renderLeftActions={LeftActions}
+          // onSwipeableLeftOpen={handleLeft} 
+          renderLeftActions={(progress, dragX)=> 
+            <LeftActions progress={progress} dragX={dragX} onPress={handleLeft}/>}
+          renderRightActions={(progress, dragX)=>     
         <RightActions progress={progress} dragX={dragX} onPress={handleRight} />}
     >
       <View style={styles.container}>
@@ -80,7 +96,7 @@ const styles = StyleSheet.create({
     color: '#222',
     fontWeight: "100",
     paddingLeft: 5,
-    flex: 1
+    // flex: 1
   },
   hours: {
     fontSize: 12,
@@ -93,7 +109,7 @@ const styles = StyleSheet.create({
   leftAction:{
     backgroundColor: '#0062CC',
     justifyContent: 'center',
-    // flex:1,
+    flex:1,
   },
   rightAction:{
     backgroundColor: '#FF0000',
